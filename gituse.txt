@@ -31,6 +31,9 @@ git config --global user.email “git邮箱(注册用的账号邮箱)”
 
 	(2)上传代码
 在库文件新建想要的文件，右键 git bash，输入git add 文件名，输入 git commit -m “测试是否成功”
-输入 push 指令 git push origin main。每次更新都重复一下push指令，当出现Everything up-to-date，上传成功
-
+输入 push 指令 git push origin main。
+再更新文件
+git add .
+git commit -m "更新内容"
+git push
 
