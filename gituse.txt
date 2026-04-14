@@ -1,0 +1,36 @@
+rc使用日记（windows）
+
+
+
+1.Git和Github的绑定：
+
+	(1)查看密钥：cd ~/.ssh,若返回“no such file or directory”说明电脑没有ssh key,创建ssh key:ssh-keygen -t rsa -C "git账号（注册git的邮箱）"，回车三次，按yes。成功后找到两个your开头的文件路径，查找.ssh的文件复制公用密钥（ssh key pub）（补充：还有私人密钥防泄漏）
+
+	(2)假如电脑是中文名字，添加密钥失败。以下4步：
+强制指定 SSH 配置目录到 D 盘（避开C盘中文）
+export SSH_HOME=/d/ssh_config
+mkdir -p $SSH_HOME
+生成密钥到 D 盘
+ssh-keygen -t rsa -C "Cnn.875864@outlook.com" -f $SSH_HOME/id_rsa -N ""
+启动 agent 并添加密钥
+eval $(ssh-agent -s)
+ssh-add $SSH_HOME/id_rsa
+测试连接
+ssh -o UserKnownHostsFile=$SSH_HOME/known_hosts git@github.com
+
+	(3)绑定ssh密钥：
+	(3.1)在github主页内找到add ssh key,把1中复制的公用密钥黏贴到里面去，此时邮箱也会提示你。Git bash中，输入：ssh -T git@github.com，也是三次回车输入yes
+	(3.2)剩余配置
+git config --global user.name “gitname(账号名称)”
+git config --global user.email “git邮箱(注册用的账号邮箱)”
+
+2.使用Git将代码提交到GitHub：
+
+	(1)克隆仓库
+仓库-code-ssh-复制地址(http开头)，在要你想要储存的文件地址中(库文件)打开bash输入：git clone 地址
+
+	(2)上传代码
+在库文件新建想要的文件，右键 git bash，输入git add 文件名，输入 git commit -m “测试是否成功”
+输入 push 指令 git push origin main。每次更新都重复一下push指令，当出现Everything up-to-date，上传成功
+
+
